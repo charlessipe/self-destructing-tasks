@@ -13,24 +13,28 @@
 
         <form ng-submit="addTodo()" class='list-group-item'>
           <input type="text" ng-model="todoText" />
-          <select>
-            <option value="low">Low</option>
-            <option value="medium">Medium</option>
-            <option value="high">High</option>
-          </select>
           <input type="submit"/>
         </form>
 
         </div>
 
         <div class="container">
-          <h4 class='list-group-item' class="title">Active Tasks</h4>
+          <h4 class='list-group-item' class="title">Completed Tasks</h4>
           <div ng-repeat="tasks in exampleTasks" class="list-group-item">
-            <input type="checkbox" ng-model="tasks.done"/></input>
-            <input type="text" ng-model="tasks.name"/> {{ things.name }} </input> 
+            <input type="checkbox" ng-model="tasks.done"/>
+            <input type="text" ng-model="tasks.name"/>
           </div>
         </div>
 
+        <div class="container">
+          <h4 class='list-group-item' class="title">Self-Destructed Tasks</h4>
+          <div ng-repeat="tasks in exampleTasks" class="list-group-item">
+            <input type="checkbox" ng-model="tasks.done"/>
+            <input type="text" ng-model="tasks.name"/>
+          </div>
+        </div>
+
+      </div>
 
   </div>
 
