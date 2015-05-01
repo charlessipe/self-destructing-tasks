@@ -2,11 +2,6 @@
 
 angular.module('destructingTaskListApp') //,["firebase"] injecting firebase causes app to break
   .controller('MainCtrl', function ($scope, $http) {
-    $scope.awesomeThings = [
-      {done: false, name:'Eat carrots'},
-      {done: false, name: 'Run 2 miles'},
-      {done: false, name: 'Do 100 pushups'},
-    ];
 
     var ref = new Firebase("https://glowing-heat-9383.firebaseio.com/"); // Instantiate the Firebase service with the new operator.
 
@@ -14,50 +9,41 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
     //$scope.data = $firebaseObject(ref);
 
     // create a synchronized array
-    //$scope.tasks = $firebaseArray(ref);
+    //$scope.exampleTasks = $firebaseArray(ref);
 
-    $scope.addTodo = function() {   
+    $scope.addTodo = function() {   // add a method to scope
       var newTodo = {
       done: false,
-      name: $scope.todoText
+      name: $scope.todoText,
+      //timestamp: new Date().getTime();
       };
 
       $scope.exampleTasks.push(newTodo);  // Push input onto array
-    
+      $scope.tasks.push(newTodo); // Push input onto synchronized array
+
       $scope.todoText = '';  // Erases the input after submit
     }
-
-    /* $scope.hideOldTasks = function() {
-      if (exampleTasks.timestamp > 7 days) {
-        nghide = true;
-      } 
-
-      else {
-        nghide = false;
-      }
-
-    };
-    */
-
-    $scope.todoItems = [
-      {done: false, name: 'Set a goal'}
-    ];
 
     // Example tasks to show in view
     $scope.exampleTasks = [
       {done: false, name:'Buy milk'},
       {done: false, name: 'Check the mail'},
-      {done: false, name: 'Practice JavaScript'},
+      {done: true, name: 'Practice JavaScript'},
     ];
 
-    
+    /*
     $http.get('/api/things').success(function(awesomeThings) {
       $scope.awesomeThings = awesomeThings;
     });
 
+    $scope.awesomeThings = [
+      {done: false, name:'Eat carrots'},
+      {done: false, name: 'Run 2 miles'},
+      {done: false, name: 'Do 100 pushups'},
+    ];
+    */
   });
 
 
-//['firebase','ui.router'] 
 
 //, $firebaseObject
