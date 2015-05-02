@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module('destructingTaskListApp', [
+  'firebase',
   'ngCookies',
   'ngResource',
   'ngSanitize',
