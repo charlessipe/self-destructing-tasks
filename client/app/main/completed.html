@@ -25,7 +25,7 @@
 
         <div class="container">
           <h4 class='list-group-item' class="title">Completed Tasks</h4>
-          <div ng-repeat="tasks in exampleTasks" class="list-group-item">
+          <div ng-repeat="tasks in exampleTasks" class="list-group-item" ng-hide="!tasks.done">
             <input type="checkbox" ng-model="tasks.done"/>
             <input type="text" ng-model="tasks.name"/>
           </div>
@@ -33,7 +33,7 @@
 
         <div class="container">
           <h4 class='list-group-item' class="title">Self-Destructed Tasks</h4>
-          <div ng-repeat="tasks in exampleTasks" class="list-group-item">
+          <div ng-repeat="tasks in exampleTasks" class="list-group-item" ng-hide="!tasks.done">
             <input type="checkbox" ng-model="tasks.done"/>
             <input type="text" ng-model="tasks.name"/>
           </div>

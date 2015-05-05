@@ -14,3 +14,20 @@ angular.module('destructingTaskListApp', [
 
     $locationProvider.html5Mode(true);
   });
+
+/*
+destructingTaskListApp.directive('changeState', function(){
+  return {
+    templateUrl: 'app/main/main.html',
+    replace: true,
+    restrict: 'A',
+    link: function(scope, element, attributes) {
+      var $seekBar = $(element);
+ 
+      $seekBar.click(function(event) {
+        updateSeekPercentage($seekBar, event);
+      });
+    }
+  }
+}
+*/
