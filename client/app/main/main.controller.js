@@ -29,15 +29,16 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
     $scope.markComplete = function(start) {
       var newCompletedTask = {
         done: true, 
-        name: "Completed task",
+        name: $scope.exampleTasks[start].name,
         priority: "low",
-        timestamp: "3"
+        timestamp: moment().format("MMM Do, hh:mmA")
       }
 
       $scope.exampleTasks.$add(newCompletedTask);
       $scope.exampleTasks.$save();
+      $scope.exampleTasks.$remove(start);
 
-      alert("hi");
+      alert($scope.exampleTasks[start].name);
       alert(moment().format("ddd, hA"));
 
       //$scope.exampleTasks[start].name = true;
