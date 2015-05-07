@@ -17,7 +17,7 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       var newTodo = {
         done: false,
         name: $scope.todoText,
-        priority: "low",
+        priority: $scope.priorityLevel,
         timestamp: moment().format("MMM Do, hh:mmA")
       }
 
@@ -30,7 +30,7 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       var newCompletedTask = {
         done: true, 
         name: $scope.exampleTasks[start].name,
-        priority: "low",
+        priority: $scope.priorityLevel,
         timestamp: moment().format("MMM Do, hh:mmA")
       }
 
@@ -38,10 +38,16 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       $scope.exampleTasks.$save();
       $scope.exampleTasks.$remove(start);
 
-      alert($scope.exampleTasks[start].name);
-      alert(moment().format("ddd, hA"));
+      alert($scope.exampleTasks[start].timestamp);
+      //alert(moment().diff(moment($scope.exampleTasks[start].timestamp)));
+      alert(moment([2007, 0, 29]).diff(moment([2007, 0, 28]), 'days') + " days"); // 1, works
+      alert(moment().diff(moment($scope.exampleTasks[start].timestamp), 'days') + " days"); // shows NAN
+      //alert(moment($scope.exampleTasks[start].timestamp).diff(moment([2007, 0, 28]), 'days') + " days"); // 1
+      //alert($scope.exampleTasks[start].name);
+      //alert(moment().format("ddd, hA"));
+      //alert(moment().diff(1390309386.271075)).format('days'));
+      //alert(moment().diff($scope.exampleTasks[start].timestamp)).format('days'));
 
-      //$scope.exampleTasks[start].name = true;
     }
 
     $scope.removeTask = function(start) {  //remove a task from Firebase
@@ -51,6 +57,16 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       //$scope.doneTasks.$add(oldTodo); // add todo item to doneTasks array
       //$scope.doneTasks.$save();
     }
+
+    /*
+    $scope.destroyTask = function() {
+      var timeDifference =  moment(moment().diff(1390309386.271075)).format('H m s'); {
+
+      }
+    }
+    */
+
+
 
     /*
     $scope.markComplete = function(start) {  //works to remove task from Firebase
