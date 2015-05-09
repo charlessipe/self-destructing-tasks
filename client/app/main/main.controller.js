@@ -12,6 +12,7 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
     // create a synchronized array
     $scope.exampleTasks = $firebaseArray(ref);
     $scope.doneTasks = $firebaseArray(ref2);
+    $scope.priorityLevel = 'low';
 
     $scope.addTodo = function() {   // add a method to scope
       var newTodo = {
@@ -30,7 +31,7 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       var newCompletedTask = {
         done: true, 
         name: $scope.exampleTasks[start].name,
-        priority: $scope.priorityLevel,
+        priority: $scope.exampleTasks[start].priority,
         timestamp: moment().format("MMM Do, hh:mmA")
       }
 
@@ -39,9 +40,17 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       $scope.exampleTasks.$remove(start);
 
       alert($scope.exampleTasks[start].timestamp);
+
+      //alert(moment($scope.exampleTasks[start].timestamp).fromNow()); // returns a few seconds
+      alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "days") + " days");
+      alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "minutes") + " minutes");      
+      //alert(moment([2007, 0, 29]).diff(moment([2007, 0, 28]), 'days') + " days"); // 1, works
+      
+      //alert(moment([2015, 2, 1]).fromNow());
+      
+
+
       //alert(moment().diff(moment($scope.exampleTasks[start].timestamp)));
-      alert(moment([2007, 0, 29]).diff(moment([2007, 0, 28]), 'days') + " days"); // 1, works
-      alert(moment().diff(moment($scope.exampleTasks[start].timestamp), 'days') + " days"); // shows NAN
       //alert(moment($scope.exampleTasks[start].timestamp).diff(moment([2007, 0, 28]), 'days') + " days"); // 1
       //alert($scope.exampleTasks[start].name);
       //alert(moment().format("ddd, hA"));
@@ -49,6 +58,8 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       //alert(moment().diff($scope.exampleTasks[start].timestamp)).format('days'));
 
     }
+
+    
 
     $scope.removeTask = function(start) {  //remove a task from Firebase
 
