@@ -9,7 +9,7 @@
         <h1>Destructing Task List</h1>
 
         <div class="container">
-          <h4 class='list-group-item' class="title">Add a Task</h4>
+          <h4 class='list-group-item task-title' class="title">Add a Task</h4>
 
         <form ng-submit="addTodo()" class='list-group-item'>
           <input type="text" placeholder="Task Description" ng-model="todoText" /></input>
@@ -23,8 +23,8 @@
 
         </div>
 
-        <div class="container">
-          <h4 class='list-group-item' class="title">Active Tasks</h4>
+        <div class="container" ng-init="destroyTask()">
+          <h4 class='list-group-item' class="title">Active Tasks - Time Started - Priority</h4>
           <div ng-repeat="tasks in exampleTasks" class="list-group-item" ng-hide="tasks.done" >
             <input type="checkbox" ng-model="tasks.done" ng-click="markComplete($index)"/></input>
             <input type="text" ng-model="tasks.name"/></input> <input type="text" ng-model="tasks.timestamp"/></input> <input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span>

@@ -4,14 +4,12 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
   .controller('MainCtrl', function ($scope, $http, $firebaseObject, $firebaseArray) {
 
     var ref = new Firebase("https://glowing-heat-9383.firebaseio.com/"); // Instantiate the Firebase service with the new operator.
-    var ref2 = new Firebase("https://completed-tasks.firebaseio.com/");
 
     // download the data into a local object
     $scope.data = $firebaseObject(ref);
 
     // create a synchronized array
     $scope.exampleTasks = $firebaseArray(ref);
-    $scope.doneTasks = $firebaseArray(ref2);
     $scope.priorityLevel = 'low';
 
     $scope.addTodo = function() {   // add a method to scope
@@ -19,7 +17,8 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
         done: false,
         name: $scope.todoText,
         priority: $scope.priorityLevel,
-        timestamp: moment().format("MMM Do, hh:mmA")
+        timestamp: moment().format("MMM Do, hh:mmA"), 
+        destructed: false
       }
 
       $scope.exampleTasks.$add(newTodo);  // Push input onto array
@@ -32,7 +31,8 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
         done: true, 
         name: $scope.exampleTasks[start].name,
         priority: $scope.exampleTasks[start].priority,
-        timestamp: moment().format("MMM Do, hh:mmA")
+        timestamp: moment().format("MMM Do, hh:mmA"), 
+        destructed: true
       }
 
       $scope.exampleTasks.$add(newCompletedTask);
@@ -44,22 +44,10 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       //alert(moment($scope.exampleTasks[start].timestamp).fromNow()); // returns a few seconds
       alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "days") + " days");
       alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "minutes") + " minutes");      
-      //alert(moment([2007, 0, 29]).diff(moment([2007, 0, 28]), 'days') + " days"); // 1, works
-      
-      //alert(moment([2015, 2, 1]).fromNow());
-      
-
-
-      //alert(moment().diff(moment($scope.exampleTasks[start].timestamp)));
-      //alert(moment($scope.exampleTasks[start].timestamp).diff(moment([2007, 0, 28]), 'days') + " days"); // 1
-      //alert($scope.exampleTasks[start].name);
-      //alert(moment().format("ddd, hA"));
-      //alert(moment().diff(1390309386.271075)).format('days'));
-      //alert(moment().diff($scope.exampleTasks[start].timestamp)).format('days'));
 
     }
 
-    
+
 
     $scope.removeTask = function(start) {  //remove a task from Firebase
 
@@ -69,47 +57,36 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       //$scope.doneTasks.$save();
     }
 
-    /*
-    $scope.destroyTask = function() {
-      var timeDifference =  moment(moment().diff(1390309386.271075)).format('H m s'); {
 
-      }
-    }
-    */
-
-
-
-    /*
-    $scope.markComplete = function(start) {  //works to remove task from Firebase
-      var oldTodo = {
-        done: false,
-        name: "Practice, practice, practice",  //$scope.exampleTasks.name[start],
-        name2: "Hi-yo"
-      }
-
-      $scope.exampleTasks.$remove(start);
+    $scope.destroyTask = function() {  
+      alert("hi cool dude");
+      console.log("Hi console");
       
-      $scope.doneTasks.$add(oldTodo); // add todo item to doneTasks array
-      $scope.doneTasks.$save();
+      console.log($scope.exampleTasks[0].name); // says its undefined
+      //var exampleTasks = $scope.exampleTasks; 
+      //console.log(exampleTasks);
+        for(var i = 0; i < $scope.exampleTasks.length; i++) {  // loop through each task
+          console.log("hello" + i);
+        
+          //if (moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes" > 7) {  // if task is older than 7 minutes
+           // console.log("destroyed" + i);
+          //var newDestroyedTask = {  // create new task and remove old task
+          //  done: false, 
+          //  name: $scope.exampleTasks[i].name,
+          //  priority: $scope.exampleTasks[i].priority,
+          //  timestamp: moment().format("MMM Do, hh:mmA"), 
+          //  destructed: true
+          //}
+          //$scope.exampleTasks.$add(newDestroyedTask);
+          //$scope.exampleTasks.$save();
+          //$scope.exampleTasks.$remove(i); // remove task at index i
+          //*/
+        //}
+        
+        }
+        
     }
-    /*
 
-
-      // find current item in the array
-      // change done to true $scope.exampleTasks.splice(start, 1);
-
-
-    /*
-    $http.get('/api/things').success(function(awesomeThings) {
-      $scope.awesomeThings = awesomeThings;
-    });
-
-    $scope.awesomeThings = [
-      {done: false, name:'Eat carrots'},
-      {done: false, name: 'Run 2 miles'},
-      {done: false, name: 'Do 100 pushups'},
-    ];
-    */
   });
 
 
