@@ -12,15 +12,6 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
     $scope.exampleTasks = $firebaseArray(ref);
     $scope.priorityLevel = 'low';
 
-    $scope.notActive = function() {
-      if (tasks.done === true) {
-        return true;
-      }
-      else {
-        return false;
-      }
-    }
-
     $scope.addTodo = function() {   // add a method to scope
       var newTodo = {
         done: false,
@@ -110,7 +101,7 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
     }
     
     
-
+    $scope.destroyTask();
   });
 
 
