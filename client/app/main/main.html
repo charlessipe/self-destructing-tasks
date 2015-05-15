@@ -23,11 +23,11 @@
 
         </div>
 
-        <div class="container" ng-init="destroyTask()">
+        <div class="container">
           <h4 class='list-group-item' class="title">Active Tasks - Time Started - Priority</h4>
-          <div ng-repeat="tasks in exampleTasks" class="list-group-item" ng-hide="tasks.done" >
+          <div ng-repeat="tasks in exampleTasks" class="list-group-item" ng-hide="tasks.destructed">
             <input type="checkbox" ng-model="tasks.done" ng-click="markComplete($index)"/></input>
-            <input type="text" ng-model="tasks.name"/></input> <input type="text" ng-model="tasks.timestamp"/></input> <input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span>
+            <input type="text" ng-model="tasks.name"/></input> <input type="text" ng-model="tasks.timestamp"/></input> <input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span> <span class="glyphicon glyphicon-time" ng-click="destroyTask($index)"></span>
           </div>
         </div>
 

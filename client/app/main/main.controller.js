@@ -12,6 +12,15 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
     $scope.exampleTasks = $firebaseArray(ref);
     $scope.priorityLevel = 'low';
 
+    $scope.notActive = function() {
+      if (tasks.done === true) {
+        return true;
+      }
+      else {
+        return false;
+      }
+    }
+
     $scope.addTodo = function() {   // add a method to scope
       var newTodo = {
         done: false,
@@ -32,7 +41,7 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
         name: $scope.exampleTasks[start].name,
         priority: $scope.exampleTasks[start].priority,
         timestamp: moment().format("MMM Do, hh:mmA"), 
-        destructed: true
+        destructed: false
       }
 
       $scope.exampleTasks.$add(newCompletedTask);
@@ -44,32 +53,40 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       //alert(moment($scope.exampleTasks[start].timestamp).fromNow()); // returns a few seconds
       alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "days") + " days");
       alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "minutes") + " minutes");      
-
     }
-
-
 
     $scope.removeTask = function(start) {  //remove a task from Firebase
-
       $scope.exampleTasks.$remove(start);
-      
-      //$scope.doneTasks.$add(oldTodo); // add todo item to doneTasks array
-      //$scope.doneTasks.$save();
     }
 
-
-    $scope.destroyTask = function() {  
-      alert("hi cool dude");
-      console.log("Hi console");
-      
-      console.log($scope.exampleTasks[0].name); // says its undefined
+    
+    $scope.destroyTask = function(start) {  
+      //console.log($scope.exampleTasks[start].name); 
+      //var taskAge = moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "minutes");
       //var exampleTasks = $scope.exampleTasks; 
       //console.log(exampleTasks);
         for(var i = 0; i < $scope.exampleTasks.length; i++) {  // loop through each task
-          console.log("hello" + i);
-        
-          //if (moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes" > 7) {  // if task is older than 7 minutes
-           // console.log("destroyed" + i);
+          console.log($scope.exampleTasks[i].name);
+          console.log(moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes"));
+          console.log($scope.exampleTasks[i].done);
+          var taskAge = moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes");
+          console.log(taskAge);
+          if ((taskAge > 7) & !$scope.exampleTasks[i].done) {
+            console.log ("Destroy this task");
+            var newDestroyedTask = {  // create new task and remove old task
+            done: false, 
+            name: $scope.exampleTasks[i].name,
+            priority: $scope.exampleTasks[i].priority,
+            timestamp: moment().format("MMM Do, hh:mmA"), 
+            destructed: true
+            }
+
+            $scope.exampleTasks.$add(newDestroyedTask);
+            $scope.exampleTasks.$save();
+            $scope.exampleTasks.$remove(i); // remove task at index i
+
+          }
+
           //var newDestroyedTask = {  // create new task and remove old task
           //  done: false, 
           //  name: $scope.exampleTasks[i].name,
@@ -80,12 +97,19 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
           //$scope.exampleTasks.$add(newDestroyedTask);
           //$scope.exampleTasks.$save();
           //$scope.exampleTasks.$remove(i); // remove task at index i
-          //*/
-        //}
-        
+          //
+          //}
+          //if(moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes") > 7) {  // if task is older than 7 minutes
+            //console.log("destroyed" + $scope.exampleTask[i].name + $scope.exampleTask[i].timestamp);
+          //}
+
         }
         
+    //}  
+      
     }
+    
+    
 
   });
 
