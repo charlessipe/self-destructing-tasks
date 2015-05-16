@@ -6,13 +6,13 @@
 
   <div class='row'>
       <div class="col-md-12">
-        <h1>Destructing Task List</h1>
+        <h1><span class="glyphicon glyphicon-fire"></span> Destructing Task List</h1>
 
         <div class="container">
           <h4 class='list-group-item' class="title">Add a Task</h4>
 
         <form ng-submit="addTodo()" class='list-group-item'>
-          <input type="text" placeholder="Task Description" ng-model="todoText" /></input>
+          <input type="text" class="form-control" placeholder="Task Description" ng-model="todoText" /></input>
           <select>
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -24,49 +24,54 @@
         </div>
 
         <div class="container">
-          <h4 class='list-group-item' class="title">Completed Tasks - Time Completed - Priority</h4>
-          <div ng-repeat="tasks in exampleTasks" class="list-group-item" ng-hide="!tasks.done">
-            <input type="checkbox" ng-model="tasks.done"/></input>
-            <input type="text" ng-model="tasks.name"/></input> <input type="text" ng-model="tasks.timestamp"/></input> <input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-ok-sign" ></span> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span>
-          </div>
-        </div>
 
-        <div class="container">
-          <h4 class='list-group-item' class="title">Self-Destructed Tasks</h4>
-          <div ng-repeat="tasks in exampleTasks" class="list-group-item" ng-hide="!tasks.destructed">
-            <input type="checkbox" ng-model="tasks.done"/>
-            <input type="text" ng-model="tasks.name"/></input> <input type="text" ng-model="tasks.timestamp"/></input> <input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span>
-          </div>
+        <div class="panel panel-default">
+        <div class="panel-heading"><h4>Completed Tasks</h4></div>
+        <div class="panel-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Task Description</th>
+                <th>Time Completed</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="tasks in exampleTasks" ng-hide="!tasks.done">
+                <td><input type="checkbox" ng-model="tasks.done"/></input> <input type="text" ng-model="tasks.name"/></input></td>
+                <td><input type="text" ng-model="tasks.timestamp"/></input></td>
+                <td><input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+        </div>
+        
+        <div class="panel panel-default">
+        <div class="panel-heading"><h4>Self-Destructed Tasks</h4></div>
+        <div class="panel-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Task Description</th>
+                <th>Time Task Started</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="tasks in exampleTasks" ng-hide="!tasks.destructed">
+                <td><input type="checkbox" ng-model="tasks.done"/></input> <input type="text" ng-model="tasks.name"/></input></td>
+                <td><input type="text" ng-model="tasks.timestamp"/></input></td>
+                <td><input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>          
 
       </div>
 
   </div>
-
-<!--
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="task in tasks">
-        <li> {{ scope.tasks }} </li>
-      </ul>
-      <p>Hi</p>
-    </div>
-  </div>
-</div>
-
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo Me Charles!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
-
--->
 
 <footer class="footer">
   <div class="container">

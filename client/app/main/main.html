@@ -6,13 +6,13 @@
 
   <div class='row'>
       <div class="col-md-12">
-        <h1>Destructing Task List</h1>
+        <h1><span class="glyphicon glyphicon-fire"></span> Destructing Task List</h1>
 
         <div class="container">
           <h4 class='list-group-item task-title' class="title">Add a Task</h4>
 
         <form ng-submit="addTodo()" class='list-group-item'>
-          <input type="text" placeholder="Task Description" ng-model="todoText" /></input>
+          <input type="text" class="form-control" placeholder="Task Description" ng-model="todoText" /></input>
           <select ng-model="priorityLevel">
             <option value="low">Low</option>
             <option value="medium">Medium</option>
@@ -21,18 +21,30 @@
           <button type="submit" class="btn btn-success">Submit</button>
         </form>
 
+        <div class="panel panel-default">
+        <div class="panel-heading"><h4>Active Tasks</h4></div>
+        <div class="panel-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Task Description</th>
+                <th>Time Started</th>
+                <th>Priority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="tasks in exampleTasks" ng-hide="tasks.destructed || tasks.done">
+                <td><input type="checkbox" ng-model="tasks.done" ng-click="markComplete($index)"/></input> <input type="text" ng-model="tasks.name"/></input></td>
+                <td><input type="text" ng-model="tasks.timestamp"/></input></td>
+                <td><input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span> <span class="glyphicon glyphicon-time" ng-click="destroyTask($index)"></span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-
-        <div class="container">
-          <h4 class='list-group-item' class="title">Active Tasks - Time Started - Priority</h4>
-          <div ng-repeat="tasks in exampleTasks" class="list-group-item" ng-init="" ng-hide="tasks.destructed || tasks.done">
-              <input type="checkbox" ng-model="tasks.done" ng-click="markComplete($index)"/></input>
-              <input type="text" ng-model="tasks.name"/></input> <input type="text" ng-model="tasks.timestamp"/></input> <input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span> <!--<span class="glyphicon glyphicon-time" ng-click="destroyTask($index)"></span> -->
-          </div>
         </div>
-
 
   </div>
+</div>
 
 <!--
   <div class="row">
