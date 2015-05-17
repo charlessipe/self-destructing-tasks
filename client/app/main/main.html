@@ -1,7 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-
-
 <div class="container">
 
   <div class='row'>
@@ -13,7 +11,7 @@
 
         <form ng-submit="addTodo()" class='list-group-item'>
           <input type="text" class="form-control" placeholder="Task Description" ng-model="todoText" /></input>
-          <select ng-model="priorityLevel">
+          <span>Priority: </span><select ng-model="priorityLevel">
             <option value="low">Low</option>
             <option value="medium">Medium</option>
             <option value="high">High</option>
@@ -36,7 +34,7 @@
               <tr ng-repeat="tasks in exampleTasks" ng-hide="tasks.destructed || tasks.done">
                 <td><input type="checkbox" ng-model="tasks.done" ng-click="markComplete($index)"/></input> <input type="text" ng-model="tasks.name"/></input></td>
                 <td><input type="text" ng-model="tasks.timestamp"/></input></td>
-                <td><input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span> <span class="glyphicon glyphicon-time" ng-click="destroyTask($index)"></span></td>
+                <td><input type="text" ng-model="tasks.priority"/></input> <span class="glyphicon glyphicon-remove-circle" ng-click="removeTask($index)"></span> <span class="glyphicon glyphicon-time" ng-click="destroyTask()"></span></td>
               </tr>
             </tbody>
           </table>
@@ -45,31 +43,6 @@
 
   </div>
 </div>
-
-<!--
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}</a></li>
-      </ul>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="task in tasks">
-        <li> {{ scope.tasks }} </li>
-      </ul>
-      <p>Hi</p>
-    </div>
-  </div>
-</div>
-
-<header class="hero-unit" id="banner">
-  <div class="container">
-    <h1>'Allo Me Charles!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
-
--->
 
 <footer class="footer">
   <div class="container">

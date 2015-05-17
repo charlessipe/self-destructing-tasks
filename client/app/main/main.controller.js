@@ -39,64 +39,43 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
       $scope.exampleTasks.$save();
       $scope.exampleTasks.$remove(start);
 
-      alert($scope.exampleTasks[start].timestamp);
-
-      //alert(moment($scope.exampleTasks[start].timestamp).fromNow()); // returns a few seconds
-      alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "days") + " days");
-      alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "minutes") + " minutes");      
+      //alert($scope.exampleTasks[start].timestamp);
+      //alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "days") + " days");
+      //alert(moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "minutes") + " minutes");      
     }
 
     $scope.removeTask = function(start) {  //remove a task from Firebase
       $scope.exampleTasks.$remove(start);
     }
-
     
-    $scope.destroyTask = function(start) {  
+    $scope.destroyTask = function() {  
       //console.log($scope.exampleTasks[start].name); 
       //var taskAge = moment().diff(moment($scope.exampleTasks[start].timestamp, "MMM Do, hh:mmA"), "minutes");
       //var exampleTasks = $scope.exampleTasks; 
       //console.log(exampleTasks);
-        for(var i = 0; i < $scope.exampleTasks.length; i++) {  // loop through each task
-          console.log($scope.exampleTasks[i].name);
-          console.log(moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes"));
-          console.log($scope.exampleTasks[i].done);
-          var taskAge = moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes");
-          console.log(taskAge);
-          if ((taskAge > 7) & !$scope.exampleTasks[i].done) {
-            console.log ("Destroy this task");
-            var newDestroyedTask = {  // create new task and remove old task
+      for(var i = 0; i < $scope.exampleTasks.length; i++) {  // loop through each task
+        //console.log($scope.exampleTasks[i].name);
+        console.log(moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes"));
+        console.log($scope.exampleTasks[i].done);
+        var taskAge = moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes");
+        //console.log(taskAge);
+        if ((taskAge > 7) & !$scope.exampleTasks[i].done) {
+          console.log ("Destroy this task");
+          var newDestroyedTask = {  // create new task and remove old task
             done: false, 
             name: $scope.exampleTasks[i].name,
             priority: $scope.exampleTasks[i].priority,
-            timestamp: moment().format("MMM Do, hh:mmA"), 
+            timestamp: $scope.exampleTasks[i].timestamp, // use time when task created moment().format("MMM Do, hh:mmA"), 
             destructed: true
-            }
-
-            $scope.exampleTasks.$add(newDestroyedTask);
-            $scope.exampleTasks.$save();
-            $scope.exampleTasks.$remove(i); // remove task at index i
-
           }
 
-          //var newDestroyedTask = {  // create new task and remove old task
-          //  done: false, 
-          //  name: $scope.exampleTasks[i].name,
-          //  priority: $scope.exampleTasks[i].priority,
-          //  timestamp: moment().format("MMM Do, hh:mmA"), 
-          //  destructed: true
-          //}
-          //$scope.exampleTasks.$add(newDestroyedTask);
-          //$scope.exampleTasks.$save();
-          //$scope.exampleTasks.$remove(i); // remove task at index i
-          //
-          //}
-          //if(moment().diff(moment($scope.exampleTasks[i].timestamp, "MMM Do, hh:mmA"), "minutes") > 7) {  // if task is older than 7 minutes
-            //console.log("destroyed" + $scope.exampleTask[i].name + $scope.exampleTask[i].timestamp);
-          //}
+          $scope.exampleTasks.$add(newDestroyedTask);
+          $scope.exampleTasks.$save();
+          $scope.exampleTasks.$remove(i); // remove task at index i
 
         }
-        
-    //}  
+
+      }
       
     }
     
@@ -104,6 +83,3 @@ angular.module('destructingTaskListApp') //,["firebase"] injecting firebase caus
     $scope.destroyTask();
   });
 
-
-
-//, $firebaseObject
